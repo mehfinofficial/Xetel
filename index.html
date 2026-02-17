@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta 
+  name="viewport" 
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>Xetel</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/stylesheet.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00c853">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+
+
+</head>
+
+<body>
+
+
+
+<!-- ================= LOGIN SCREEN ================= -->
+<div id="loginScreen" class="login-wrapper">
+
+    <div class="login-card">
+        <img class="login-logo" src="images/logocustom.png" alt="logo">
+        <h3 class="login-text">Login</h3>
+
+        <div class="form-group">
+            <input type="text" id="username" required>
+            <label>Username</label>
+        </div>
+
+        <div class="form-group">
+            <input type="password" id="password" required>
+            <label>Password</label>
+        </div>
+
+        
+        <button id="loginBtn" class="primary-btn">Login</button>
+    
+    <div id="loginError" class="login-error hidden"></div>
+
+    </div>
+
+</div>
+
+
+<div id="splashScreen">
+    <div class="splash-inner">
+        <img src="images/logocustom.png" class="splash-logo">
+        <div class="splash-loader">
+    <div class="loader-bar"></div>
+</div>
+
+        <div class="splash-tagline">Xetel Softwares</div>
+    </div>
+</div>
+
+
+
+<!-- ================= MAIN APP ================= -->
+<div id="appContainer" class="hidden">
+
+    <!-- Header -->
+    <header class="app-header">
+        <h3 id="screenTitle">Queries</h3>
+    </header>
+
+    <!-- Screens Container -->
+    <main class="app-content">
+
+       <section id="recordsScreen" class="screen active-screen">
+         <!-- Call Search -->
+<div id="callSearchWrapper" class="records-search">
+    <div class="search-box">
+        <input type="text" id="callSearchInput" placeholder="Search calls...">
+        <span id="callSearchIcon" class="search-icon">
+
+    <!-- SEARCH ICON -->
+    <svg id="searchSvg" xmlns="http://www.w3.org/2000/svg"
+         width="20" height="20" fill="none"
+         viewBox="0 0 24 24">
+        <path stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+              d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+    </svg>
+
+    <!-- CLOSE ICON (hidden initially) -->
+    <svg id="clearSvg" xmlns="http://www.w3.org/2000/svg"
+         width="20" height="20" fill="none"
+         viewBox="0 0 24 24"
+         style="display:none;">
+        <path stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="2"
+              d="M6 6l12 12M18 6l-12 12"/>
+    </svg>
+
+</span>
+
+    </div>
+</div>
+
+    <div class="records-filters">
+        <button class="record-filter active-filter" data-filter="all">All</button>
+        <button class="record-filter" data-filter="call">Calls</button>
+        <button class="record-filter" data-filter="installation">Install</button>
+        <button class="record-filter" data-filter="overdue">Overdue</button>
+        <button class="record-filter" data-filter="renewal">Renewals</button>
+    </div>
+
+   
+
+    
+    <div id="recordsList"></div>
+
+</section>
+
+
+
+        
+
+
+        <section id="addScreen" class="screen">
+
+            <button id="closeFormBtn" class="form-close-btn">
+        ✕
+    </button>
+
+            <div class="view-card form-glass-card">
+
+
+
+
+    <div class="form-toggle">
+        <button id="callToggle" class="toggle-btn active-toggle"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+</svg>
+New Call</button>
+        <button id="installToggle" class="toggle-btn"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+  <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+</svg>
+New Installation</button>
+    </div>
+
+    <form id="crmForm" class="crm-form">
+
+        <!-- COMMON FIELDS -->
+        <div class="form-group">
+            <input type="text" id="clientName" placeholder=" " required>
+            <label>Client Name</label>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" id="phoneNumber" placeholder=" " required>
+            <label>Phone Number</label>
+        </div>
+
+        <!-- CALL FIELD -->
+        <div class="form-group call-only">
+            <input type="text" placeholder=" " id="queryField">
+            <label>Query</label>
+        </div>
+
+        <!-- INSTALLATION FIELDS -->
+        
+        <div class="form-group install-only hidden">
+    <input type="text" placeholder=" " id="planTaken">
+    <label>Plan Taken</label>
+</div>
+
+        
+        <div class="form-group install-only hidden">
+            <input type="date" id="installDate">
+            <label>Installation Date</label>
+        </div>
+
+        <div class="form-group install-only hidden">
+            <input type="text" placeholder=" " id="licenseNumber">
+            <label>License Number</label>
+        </div>
+
+        <div class="form-group install-only hidden">
+            <input type="text" placeholder=" " id="paymentReceivedOn">
+            <label>Payment Received Via</label>
+        </div>
+
+        <!-- STATUS -->
+        <div class="status-toggle">
+            <label>Status:</label>
+            <select id="statusSelect">
+                <option value="pending">Pending</option>
+                <option value="done">Done</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+    <button type="submit" class="primary-btn">Save</button>
+    <button type="button" id="deleteBtn" class="danger-btn hidden">
+        Delete Record
+    </button>
+</div>
+
+
+
+    </form>
+</div>
+</section>
+
+
+       <section id="todayScreen" class="screen">
+
+    <!-- ===== EXECUTIVE ALERT STRIP ===== -->
+    <div id="execAlertStrip" class="exec-alert-strip hidden"></div>
+
+    <div class="exec-chart-card">
+    <h4>Last 7 Days Activity</h4>
+
+    <div class="dashboard-weekly-chart">
+        <div class="dashboard-bar" data-day="Mon"><span></span></div>
+        <div class="dashboard-bar" data-day="Tue"><span></span></div>
+        <div class="dashboard-bar" data-day="Wed"><span></span></div>
+        <div class="dashboard-bar" data-day="Thu"><span></span></div>
+        <div class="dashboard-bar" data-day="Fri"><span></span></div>
+        <div class="dashboard-bar" data-day="Sat"><span></span></div>
+        <div class="dashboard-bar" data-day="Sun"><span></span></div>
+    </div>
+</div>
+
+
+    <!-- ===== DATE FILTER ===== 
+    <div class="exec-date-card">
+        <div class="exec-date-row">
+            <div class="exec-date-group">
+                <label>From</label>
+                <input type="date" id="filterFrom">
+            </div>
+            <div class="exec-date-group">
+                <label>To</label>
+                <input type="date" id="filterTo">
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ===== EXECUTIVE METRICS GRID ===== -->
+    <div class="exec-stats-grid">
+
+        <div class="exec-stat-card">
+            <h3 id="execTotal">0</h3>
+            <p>Total Records</p>
+        </div>
+
+        <div class="exec-stat-card">
+            <h3 id="execPending">0</h3>
+            <p>Pending</p>
+        </div>
+
+        <div class="exec-stat-card">
+            <h3 id="execCompleted">0</h3>
+            <p>Completed</p>
+        </div>
+
+        <div class="exec-stat-card">
+            <h3 id="execOverdue">0</h3>
+            <p>Overdue Follow-Ups</p>
+        </div>
+
+        <div class="exec-stat-card">
+            <h3 id="execToday">0</h3>
+            <p>Today Activity</p>
+        </div>
+
+        <div class="exec-stat-card">
+            <h3 id="execUpcoming">0</h3>
+            <p>Upcoming Renewals</p>
+        </div>
+
+    </div>
+
+    <!-- ===== LOWER SECTION ===== -->
+    <div class="exec-lower-grid">
+
+        <div class="exec-timeline-card">
+            <h4>Recent Activity</h4>
+            <div id="execTimeline"></div>
+        </div>
+
+        <div class="exec-actions-card">
+            <h4>Quick Actions</h4>
+
+            <button onclick="switchScreen('recordsScreen','Queries')">
+                View Records
+            </button>
+
+            <button onclick="switchScreen('automationScreen','Automation')">
+                View Automation
+            </button>
+
+            <button onclick="switchScreen('addScreen','Add Record')">
+                Add Record
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+        <section id="profileScreen" class="screen">
+
+            <div class="profile-card profile-header-card">
+
+    <div class="profile-header-content">
+        <div class="profile-avatar">
+            <span id="profileInitial">A</span>
+        </div>
+
+        <div class="profile-info">
+            <h3 id="profileWelcome">Welcome back</h3>
+            <p id="profileUser">Admin</p>
+            <p class="profile-subtext">
+                Total Records: <span id="profileTotalRecords">0</span>
+            </p>
+        </div>
+
+        <button id="logoutBtn" class="logout-mini-btn">
+            Logout
+        </button>
+    </div>
+
+</div>
+
+            
+            <div class="profile-card appearance-card">
+    <h4>Appearance</h4>
+
+    <div class="appearance-toggle">
+
+        <!-- Dark Icon -->
+        <span class="appearance-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z"
+                    clip-rule="evenodd"/>
+            </svg>
+        </span>
+
+        <!-- Slider -->
+        <label class="switch profile-switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider"></span>
+        </label>
+
+        <!-- Light Icon -->
+        <span class="appearance-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z"
+                    clip-rule="evenodd"/>
+            </svg>
+        </span>
+
+    </div>
+</div>
+
+
+
+
+
+    <div class="profile-card">
+    <h4>Statistics</h4>
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+            <h3 id="totalCalls">0</h3>
+            <p>Calls</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="totalInstallations">0</h3>
+            <p>Installs</p>
+        </div>
+
+        <div class="stat-card done">
+            <h3 id="profileDonePercent">0%</h3>
+            <p>Completion</p>
+        </div>
+    </div>
+</div>
+
+<div class="profile-card" style="display: none;">
+    <h4>Activity</h4>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3 id="profileTodayCount">0</h3>
+            <p>Today</p>
+        </div>
+
+        <div class="stat-card pending">
+            <h3 id="profilePendingCount">0</h3>
+            <p>Pending</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="profileLastActivity">—</h3>
+            <p>Last Activity</p>
+        </div>
+    </div>
+</div>
+
+<div class="profile-card">
+    <h4>Weekly Activity</h4>
+
+    <div class="mini-chart">
+        <div class="mini-bar" data-day="Mon"><span></span></div>
+        <div class="mini-bar" data-day="Tue"><span></span></div>
+        <div class="mini-bar" data-day="Wed"><span></span></div>
+        <div class="mini-bar" data-day="Thu"><span></span></div>
+        <div class="mini-bar" data-day="Fri"><span></span></div>
+        <div class="mini-bar" data-day="Sat"><span></span></div>
+        <div class="mini-bar" data-day="Sun"><span></span></div>
+    </div>
+</div>
+
+
+
+
+<div class="profile-card">
+    <h4>Backup & Restore</h4>
+
+    <div class="backup-actions">
+
+        <button id="exportBtn" class="backup-btn export-btn">
+            Export Data
+        </button>
+
+        <button id="importBtn" class="backup-btn import-btn">
+            Import Data
+        </button>
+
+    </div>
+<input type="file" id="importFile" accept=".json" hidden>
+
+    <p class="backup-note">
+        Export saves a full backup file. Import will overwrite current data.
+    </p>
+</div>
+
+<div class="profile-card">
+    <h4>Recent Activity</h4>
+    <div id="activityLogContainer"></div>
+</div>
+
+
+    <div class="profile-card danger-zone-card">
+    <h4>Danger Zone</h4>
+
+    <p class="danger-warning">
+        This action will permanently delete all CRM records.
+    </p>
+
+    <button id="clearBtn" class="danger-btn">
+        Delete All Records
+
+    </button>
+</div>
+
+
+
+<!--
+<div class="profile-card logout-card">
+    <button id="logoutBtn" class="danger-btn logout-btn">
+        Logout
+    </button>
+</div>
+-->
+
+</section>
+
+<section id="automationScreen" class="screen">
+
+    <div class="automation-tabs">
+        <button class="automation-tab active" data-tab="autoFollowUps">
+            Follow-Ups
+        </button>
+        <button class="automation-tab" data-tab="autoRenewals">
+            Renewals
+        </button>
+        <button class="automation-tab" data-tab="autoTools">
+            Tools
+        </button>
+    </div>
+
+    <div id="autoFollowUps" class="automation-content active-auto-content"></div>
+    <div id="autoRenewals" class="automation-content"></div>
+    <div id="autoTools" class="automation-content">
+        
+    </div>
+
+</section>
+
+
+        <section id="viewScreen" class="screen">
+    <div id="viewContent"></div>
+    <button id="backBtn" class="primary-btn" style="margin-top:20px;">Back</button>
+</section>
+
+    </main>
+
+    <!-- Floating Bottom Navigation -->
+    <nav class="bottom-nav">
+
+        <button class="nav-item active" data-target="recordsScreen">
+            <span class="nav-badge" id="recordsBadge"></span>
+
+
+            <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+  <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+</svg>
+
+
+            <span>Queries</span>
+        </button>
+
+      <!--  <button class="nav-item" data-target="installationsScreen">
+           <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13V4M7 14H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2m-1-5-4 5-4-5m9 8h.01"/>
+</svg>
+
+
+
+            <span>Install</span>
+        </button>-->
+
+<button class="nav-item" data-target="automationScreen">
+    <span class="nav-badge" id="automationBadge"></span>
+
+    <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+</svg>
+
+    <span>Automation</span>
+</button>
+
+        <button class="nav-item nav-add" data-target="addScreen">
+            <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+
+        </button>
+
+
+
+
+
+
+        <button class="nav-item" data-target="todayScreen">
+            <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3M3.22302 14C4.13247 18.008 7.71683 21 12 21c4.9706 0 9-4.0294 9-9 0-4.97056-4.0294-9-9-9-3.72916 0-6.92858 2.26806-8.29409 5.5M7 9H3V5"/>
+</svg>
+
+
+            <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-target="profileScreen">
+            
+          <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+</svg>
+  
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
+</div>
+
+<div id="confirmOverlay" class="confirm-overlay hidden">
+    <div class="confirm-box">
+        <h3 id="confirmTitle">Confirm</h3>
+        <p id="confirmMessage">Are you sure?</p>
+
+        <div class="confirm-actions">
+    <button id="confirmCancel" class="modal-btn modal-cancel">Cancel</button>
+    <button id="confirmYes" class="modal-btn modal-confirm">Confirm</button>
+</div>
+
+    </div>
+</div>
+
+
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

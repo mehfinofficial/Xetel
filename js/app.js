@@ -1347,7 +1347,7 @@ function sendToWhatsApp(record, action = "NEW") {
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
 
-    window.location.href = url;
+    window.open(url, "_blank");
 
 }
 
@@ -2211,7 +2211,7 @@ function sendTemplateToWhatsApp(recordId, templateType) {
 const url = `https://wa.me/${formattedPhone}?text=${encoded}`;
 
 
-    window.location.href = url;
+    window.open(url, "_blank");
 
 }
 
@@ -2730,4 +2730,5 @@ function renderDashboardWeeklyChart() {
     });
 
 }
+
 

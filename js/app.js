@@ -1274,7 +1274,7 @@ function generateWhatsAppMessage(record, action = "NEW") {
         if (record.query)
             message += `QUERY: ${record.query}\n`;
 
-        message += `STATUS: ${record.status === "done" ? "Done ✅" : "Pending ❌"}\n`;
+        message += `STATUS: ${record.status === "done" ? "Done" : "Pending"}\n`;
         message += `DATE: ${formatDate(record.createdAt)}\n`;
 
     } else {
@@ -1294,7 +1294,7 @@ function generateWhatsAppMessage(record, action = "NEW") {
         if (record.paymentReceivedOn)
             message += `PAYMENT DONE : ${record.paymentReceivedOn}\n`;
 
-        message += `STATUS: ${record.status === "done" ? "Done ✅" : "Pending ❌"}\n`;
+        message += `STATUS: ${record.status === "done" ? "Done" : "Pending"}\n`;
         message += `DATED: ${formatDate(record.createdAt)}\n`;
     }
 
@@ -2159,7 +2159,7 @@ Team Xetel`;
         message =
 `Dear ${record.clientName},
 
-Welcome to the Xetel Family! 🎉
+Welcome to the Xetel Family!
 
 We are delighted to inform you that your installation has been successfully completed.
 
@@ -2730,5 +2730,6 @@ function renderDashboardWeeklyChart() {
     });
 
 }
+
 
 
